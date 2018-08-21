@@ -22,16 +22,24 @@ public class TicTacToeSpec {
 	@DisplayName("X Outside of Board - Runtime Exception")
 	void whenXOutsideBoardThenRuntimeException() {
 		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> ticTacToe.play(5, 2))
-				.withMessage("X is outside of the board");
+				.isThrownBy(() -> ticTacToe.play(5, 2));
 	}
 
 	@Test
 	@DisplayName("Y Outside of Board - Runtime Exception")
 	void whenYOutsideBoardThenRuntimeException() {
 		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> ticTacToe.play(2, 5))
-				.withMessage("Y is outside of the board");
+				.isThrownBy(() -> ticTacToe.play(2, 5));
+	}
+
+	@Test
+	@DisplayName("Spot is occupied - Runtime Exception")
+	void whenOccupiedThenRuntimeException() {
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					ticTacToe.play(2,1);
+					ticTacToe.play(2,1);
+				});
 	}
 
 }
