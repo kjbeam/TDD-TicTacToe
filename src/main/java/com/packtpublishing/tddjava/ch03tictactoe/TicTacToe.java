@@ -10,10 +10,14 @@ class TicTacToe {
 			{'\0','\0','\0'}
 	};
 
+	private char lastPlayer = '\0';
+
 	void play(int x, int y) {
 		checkAxis(x);
 		checkAxis(y);
 		setBox(x,y);
+		lastPlayer = nextPlayer();
+
 	}
 
 	void checkAxis(int axis) {
@@ -27,6 +31,14 @@ class TicTacToe {
 			throw new RuntimeException("Box is occupied");
 		} else {
 			board[x-1][y-1] = 'X';
+		}
+	}
+
+	char nextPlayer() {
+		if (lastPlayer == 'X') {
+			return 'O';
+		} else {
+			return 'X';
 		}
 	}
 }

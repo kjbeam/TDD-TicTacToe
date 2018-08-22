@@ -1,5 +1,6 @@
 package com.packtpublishing.tddjava.ch03tictactoe;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -37,9 +38,22 @@ public class TicTacToeSpec {
 	void whenOccupiedThenRuntimeException() {
 		assertThatExceptionOfType(RuntimeException.class)
 				.isThrownBy(() -> {
-					ticTacToe.play(2,1);
-					ticTacToe.play(2,1);
+					ticTacToe.play(2, 1);
+					ticTacToe.play(2, 1);
 				});
+	}
+
+	@Test
+	@DisplayName("X should be the first player")
+	void firstTurnPlayerShouldBeNext() {
+		assertThat(ticTacToe.nextPlayer()).isEqualTo('X');
+	}
+
+	@Test
+	@DisplayName("O should be after X plays")
+	void afterXThenOShouldBeNext() {
+		ticTacToe.play(1,1);
+		assertThat(ticTacToe.nextPlayer()).isEqualTo('O');
 	}
 
 }
